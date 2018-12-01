@@ -1,5 +1,4 @@
 use std::collections;
-use std::iter;
 
 const INPUT: &str = include_str!("../../etc/input-part2.txt");
 
@@ -11,11 +10,12 @@ fn process(input: &str) -> impl ToString {
     let mut current_freq: i32 = 0;
     let mut previous_freqs: collections::HashSet<i32> = [current_freq].iter().cloned().collect();
 
-    for value in iter::repeat(input.trim()).flat_map(|input| {
-        input
-            .split('\n')
-            .map(|line| line.trim().parse::<i32>().unwrap())
-    }) {
+    for value in input
+        .trim()
+        .split('\n')
+        .map(|line| line.parse::<i32>().unwrap())
+        .cycle()
+    {
         current_freq += value;
         if !previous_freqs.insert(current_freq) {
             break;
