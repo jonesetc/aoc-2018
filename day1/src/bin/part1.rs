@@ -6,8 +6,7 @@ fn main() {
 
 fn process(input: &str) -> impl ToString {
     input
-        .trim()
-        .split('\n')
+        .lines()
         .map(|line| line.parse::<i32>().unwrap())
         .sum::<i32>()
 }

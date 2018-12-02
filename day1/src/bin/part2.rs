@@ -11,8 +11,7 @@ fn process(input: &str) -> impl ToString {
     let mut previous_freqs: collections::HashSet<i32> = [current_freq].iter().cloned().collect();
 
     for value in input
-        .trim()
-        .split('\n')
+        .lines()
         .map(|line| line.parse::<i32>().unwrap())
         .cycle()
     {
