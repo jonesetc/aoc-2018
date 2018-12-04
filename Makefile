@@ -6,7 +6,6 @@ PAIRS := $(foreach\
 
 LINTS := $(addprefix lint-,$(PAIRS))
 TESTS := $(addprefix test-,$(PAIRS))
-BENCHES := $(addprefix bench-,$(PAIRS))
 BUILDS := $(addprefix build-,$(PAIRS))
 RUNS := $(addprefix run-,$(PAIRS))
 
@@ -28,18 +27,12 @@ $(TESTS):
 		--bin "part$(call part,$@)"
 test-all: $(TESTS)
 
-.PHONY: $(BENCHES) bench-all
-$(BENCHES):
-	cargo bench \
-		--package "day$(call day,$@)" \
-		--bin "part$(call part,$@)"
-bench-all: $(BENCHES)
-
 .PHONY: $(BUILDS) build-all
 $(BUILDS):
 	cargo build \
 		--package "day$(call day,$@)" \
-		--bin "part$(call part,$@)"
+		--bin "part$(call part,$@)" \
+		--release
 build-all: $(BUILDS)
 
 .PHONY: $(RUNS) run-all

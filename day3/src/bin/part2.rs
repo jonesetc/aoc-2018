@@ -22,7 +22,7 @@ impl FromStr for Claim {
             .filter(|&s| !s.is_empty())
             .map(|s| s.parse::<u32>())
             .collect::<Result<Vec<u32>, Self::Err>>()?;
-        Ok(Claim {
+        Ok(Self {
             id: parts[0],
             left_margin: parts[1],
             top_margin: parts[2],
@@ -35,10 +35,8 @@ impl FromStr for Claim {
 impl Claim {
     pub fn coords(&self) -> Vec<(u32, u32)> {
         { self.left_margin..self.left_margin + self.width }
-            .flat_map(|x| {
-                { self.top_margin..self.top_margin + self.height }
-                    .map(move |y| (x.clone(), y.clone()))
-            }).collect()
+            .flat_map(|x| { self.top_margin..self.top_margin + self.height }.map(move |y| (x, y)))
+            .collect()
     }
 }
 
@@ -65,7 +63,11 @@ fn process(input: &str) -> impl ToString {
             multiple_ids.extend(ids);
         }
     }
-    single_ids.difference(&multiple_ids).map(|id| id.to_string()).collect::<Vec<String>>().join(", ")
+    single_ids
+        .difference(&multiple_ids)
+        .map(|id| id.to_string())
+        .collect::<Vec<String>>()
+        .join(", ")
 }
 
 #[cfg(test)]
