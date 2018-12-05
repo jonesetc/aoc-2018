@@ -105,7 +105,6 @@ fn process(input: &str) -> impl ToString {
             }
         };
     }
-    println!("{:?}", sleeping_tallies);
 
     let (_, guard, minute) = sleeping_tallies
         .iter()
