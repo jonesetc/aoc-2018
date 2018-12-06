@@ -109,16 +109,16 @@ fn process(input: &str) -> impl ToString {
     let (_, guard, minute) = sleeping_tallies
         .iter()
         .map(|(guard, tallies)| {
-            let (max_tally, max_minute) = tallies.iter().fold(
-                (0, 0),
-                |(max_tally, max_minute), (&minute, &tally)| {
-                    if tally > max_tally {
-                        (tally, minute)
-                    } else {
-                        (max_tally, max_minute)
-                    }
-                },
-            );
+            let (max_tally, max_minute) =
+                tallies
+                    .iter()
+                    .fold((0, 0), |(max_tally, max_minute), (&minute, &tally)| {
+                        if tally > max_tally {
+                            (tally, minute)
+                        } else {
+                            (max_tally, max_minute)
+                        }
+                    });
             (max_tally, guard, max_minute)
         }).max()
         .unwrap();
