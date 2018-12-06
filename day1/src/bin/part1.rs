@@ -13,7 +13,7 @@ fn process(input: &str) -> impl ToString {
 
 #[cfg(test)]
 mod tests {
-    use super::process;
+    use super::*;
 
     #[test]
     fn example1() {
