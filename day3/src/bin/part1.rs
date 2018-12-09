@@ -83,7 +83,8 @@ mod tests {
                 top_margin: 3,
                 width: 4,
                 height: 4
-            }.coords(),
+            }
+            .coords(),
             vec![
                 (1, 3),
                 (1, 4),

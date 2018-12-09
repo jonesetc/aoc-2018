@@ -38,7 +38,8 @@ mod tests {
             process(
                 &vec!["abcdef", "bababc", "abbcde", "abcccd", "aabcdd", "abcdee", "ababab"]
                     .join("\n")
-            ).to_string(),
+            )
+            .to_string(),
             "12"
         );
     }

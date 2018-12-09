@@ -29,7 +29,8 @@ mod tests {
         assert_eq!(
             process(
                 &vec!["abcde", "fghij", "klmno", "pqrst", "fguij", "axcye", "wvxyz"].join("\n")
-            ).to_string(),
+            )
+            .to_string(),
             "fgij"
         );
     }
