@@ -68,8 +68,8 @@ fn process(input: &str) -> impl ToString {
 
     let excluded_claims: HashSet<u32> = { min_x..=max_x }
         .flat_map(|x| grid.get(&x).unwrap().get(&min_y))
-        .chain({ min_y..=max_y }.flat_map(|y| grid.get(&min_x).unwrap().get(&y)))
-        .chain({ min_y..=max_y }.flat_map(|y| grid.get(&max_x).unwrap().get(&y)))
+        .chain({ min_y..max_y }.flat_map(|y| grid.get(&min_x).unwrap().get(&y)))
+        .chain({ min_y..max_y }.flat_map(|y| grid.get(&max_x).unwrap().get(&y)))
         .chain({ min_x..=max_x }.flat_map(|x| grid.get(&x).unwrap().get(&max_y)))
         .cloned()
         .collect();
