@@ -1,5 +1,5 @@
 use std::cmp::{max, min};
-use std::collections::{BTreeMap, BTreeSet};
+use std::collections::{HashMap, HashSet};
 use std::num::ParseIntError;
 use std::u32;
 
@@ -37,7 +37,7 @@ fn process(input: &str) -> impl ToString {
         })
         .collect::<Vec<(u32, u32)>>();
 
-    let grid: BTreeMap<u32, BTreeMap<u32, u32>> = { min_x..=max_x }
+    let grid: HashMap<u32, HashMap<u32, u32>> = { min_x..=max_x }
         .map(|x| {
             (
                 x,
@@ -66,7 +66,7 @@ fn process(input: &str) -> impl ToString {
         })
         .collect();
 
-    let excluded_claims: BTreeSet<u32> = { min_x..=max_x }
+    let excluded_claims: HashSet<u32> = { min_x..=max_x }
         .flat_map(|x| grid.get(&x).unwrap().get(&min_y))
         .chain({ min_y..=max_y }.flat_map(|y| grid.get(&min_x).unwrap().get(&y)))
         .chain({ min_y..=max_y }.flat_map(|y| grid.get(&max_x).unwrap().get(&y)))
@@ -75,7 +75,7 @@ fn process(input: &str) -> impl ToString {
         .collect();
 
     grid.iter()
-        .fold(BTreeMap::new(), |mut tallies, (_, ys)| {
+        .fold(HashMap::new(), |mut tallies, (_, ys)| {
             ys.iter()
                 .filter(|(_, claim)| !excluded_claims.contains(claim))
                 .for_each(|(_, claim)| *tallies.entry(claim).or_insert(0) += 1);
