@@ -2,7 +2,7 @@ use std::cmp::{max, min};
 use std::num::ParseIntError;
 use std::u32;
 
-const INPUT: &str = include_str!("../../etc/input-part1.txt");
+const INPUT: &str = include_str!("../../etc/input-part2.txt");
 
 fn parse_coords(s: &str) -> Result<(u32, u32), ParseIntError> {
     let parts: Vec<&str> = s.split(", ").collect();
@@ -37,12 +37,12 @@ fn process(input: &str, cutoff: u32) -> impl ToString {
         .collect::<Vec<(u32, u32)>>();
 
     { min_x..=max_x }
-        .map(|x|{
+        .map(|x| {
             { min_y..=max_y }
-                .map(|y|{
+                .map(|y| {
                     coords
                         .iter()
-                        .map(|coord|{
+                        .map(|coord| {
                             (max(coord.0, x) - min(coord.0, x))
                                 + (max(coord.1, y) - min(coord.1, y))
                         })
@@ -61,7 +61,11 @@ mod tests {
     #[test]
     fn example1() {
         assert_eq!(
-            process(&vec!["1, 1", "1, 6", "8, 3", "3, 4", "5, 5", "8, 9",].join("\n"), 32).to_string(),
+            process(
+                &vec!["1, 1", "1, 6", "8, 3", "3, 4", "5, 5", "8, 9",].join("\n"),
+                32
+            )
+            .to_string(),
             "16"
         );
     }
