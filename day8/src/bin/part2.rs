@@ -26,7 +26,10 @@ fn sum_metadata(tree: &RefCell<VecDeque<u32>>) -> u32 {
 
         for _ in 0..metadata_count {
             let index = tree.borrow_mut().pop_front().unwrap();
-            total += children.get(index as usize - 1).cloned().unwrap_or_default();
+            total += children
+                .get(index as usize - 1)
+                .cloned()
+                .unwrap_or_default();
         }
     }
 
